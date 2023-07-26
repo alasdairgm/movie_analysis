@@ -1,18 +1,18 @@
 "0","library(tidyverse)"
 "0",""
 "0","movies <- janitor::clean_names(read_csv(""raw_data/ratings.csv""))"
-"2","[1mRows: [22m[34m11[39m [1mColumns: [22m[34m13[39m"
-"2","[36m──[39m [1mColumn specification[22m [36m──────────────────────────────────[39m
+"2","[1mRows: [22m[34m21[39m [1mColumns: [22m[34m13[39m"
+"2","[36m──[39m [1mColumn specification[22m [36m─────────────────────────────────[39m
 [1mDelimiter:[22m "",""
-[31mchr[39m  (6): Const, Title, URL, Title Type, Genres, Direc...
-[32mdbl[39m  (5): Your Rating, IMDb Rating, Runtime (mins), Ye...
+[31mchr[39m  (6): Const, Title, URL, Title Type, Genres, Dire...
+[32mdbl[39m  (5): Your Rating, IMDb Rating, Runtime (mins), Y...
 [34mdate[39m (2): Date Rated, Release Date"
 "2","
 [36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
 [36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message."
 "0","synopses <- read_csv(""raw_data/synopsis_data.csv"")"
-"2","[1mRows: [22m[34m12[39m [1mColumns: [22m[34m2[39m"
-"2","[36m──[39m [1mColumn specification[22m [36m──────────────────────────────────[39m
+"2","[1mRows: [22m[34m22[39m [1mColumns: [22m[34m2[39m"
+"2","[36m──[39m [1mColumn specification[22m [36m─────────────────────────────────[39m
 [1mDelimiter:[22m "",""
 [31mchr[39m (2): movie, synopsis"
 "2","
