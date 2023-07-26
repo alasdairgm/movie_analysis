@@ -1,0 +1,123 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(tidytext)
+
+movies <- read_csv("clean_data/movies_clean.csv")
+```
+
+Split synopses into words
+```{r}
+synopses_df <- movies %>% 
+  select(title, synopsis) %>% 
+  unnest_tokens(word, synopsis)
+
+synopses_df
+```
+
+How often does each word appear in each synopsis?
+
+```{r}
+synopses_df %>% 
+  count(title, word)
+```
+
+## Remove stop words
+
+Can see lots of stop words so will remove them.
+
+```{r}
+synopses_df_no_stop <- synopses_df %>% 
+  anti_join(stop_words, by = "word") %>% 
+  count(title, word, sort = TRUE)
+```
+
+
+# TF-IDF
+
+TF-IDF scores can be used to quantify what different documents are about. If specific words are important in one document but not in others, this could be seen as the ‘essence’ of that document.
+
+TF-IDF scores are really easy to calculate using `tidytext`. All we do is take a data frame of word counts and use the `bind_tf_idf()` function with the following arguments:
+
+1. The column which contains the terms
+2. The column indicating which document each term belongs to
+3. The column which contains the counts.
+
+
+Let's see the words ordered by TF-IDF:
+```{r}
+all_synopses_tf_idf <- synopses_df_no_stop %>% 
+  count(title, word) %>% 
+  bind_tf_idf(term = word, document = title, n = n) %>% 
+  arrange(desc(tf_idf))
+
+all_synopses_tf_idf
+```
+
+
+Now let's see the single word with the highest score in each synopsis
+```{r}
+all_synopses_tf_idf %>% 
+  group_by(title) %>% 
+  slice_max(tf_idf, n = 1)
+```
+
+# Word cloud
+
+I'm interested in seeing words not grouped by movie.
+
+```{r}
+just_words <- movies %>% 
+  select(synopsis) %>% 
+  unnest_tokens(word, synopsis) %>% 
+  anti_join(stop_words, by = "word") %>% 
+  count(word)
+
+just_words
+```
+
+
+```{r}
+library(ggwordcloud)
+
+ggwordcloud(
+  words = just_words$word,
+  freq = just_words$n,
+  min.freq = 2
+)
+```
+
+
+# Sentiments
+
+Installed the "textdata" package to get sentiment words and values. Don't need to load it in.
+
+```{r}
+# can see sentiment words here
+get_sentiments("afinn")
+```
+
+
+```{r}
+just_words %>% 
+  inner_join(get_sentiments("afinn")) %>% 
+  mutate(abs_value = abs(value)) %>% 
+  slice_max(abs_value, n = 5) %>%  # most emotive words, regardless of positice or negative
+  mutate(word = factor(word, levels = word)) %>% # alphabetical
+  ggplot() +
+  aes(x = word, y = n, fill = value) +
+  geom_col() + 
+  scale_fill_gradient2() +
+  labs(x = "\nWord in film synopses",
+       y = "Number of occurences\nacross all synopses\n",
+       fill = "Sentiment value") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.title = element_text(size = 8),
+        legend.title = element_text(size = 8))
+```
+
