@@ -1,12 +1,12 @@
 {
-    "id": "AC5EACA1",
+    "id": "97C917C9",
     "path": "~/Documents/GitHub/movie_analysis/clustering_analysis.Rmd",
     "project_path": "clustering_analysis.Rmd",
     "type": "r_markdown",
-    "hash": "425887441",
+    "hash": "4153405732",
     "contents": "",
-    "dirty": false,
-    "created": 1690367467022.0,
+    "dirty": true,
+    "created": 1690376968952.0,
     "source_on_save": false,
     "relative_order": 2,
     "properties": {
@@ -14,15 +14,15 @@
         "chunk_output_type": "inline",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "121,3",
-        "scrollLine": "124"
+        "cursorPosition": "14,15",
+        "scrollLine": "0"
     },
     "folds": "",
     "lastKnownWriteTime": 1690378950,
-    "encoding": "UTF-8",
+    "encoding": "ISO8859-1",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1690379173727,
+    "last_content_update": 1690398062475,
     "read_only": false,
     "read_only_alternatives": []
 }

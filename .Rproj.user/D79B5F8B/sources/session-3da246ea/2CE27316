@@ -1,28 +1,28 @@
 {
-    "id": "7657805F",
+    "id": "2CE27316",
     "path": "~/Documents/GitHub/movie_analysis/data_exploration.Rmd",
     "project_path": "data_exploration.Rmd",
     "type": "r_markdown",
-    "hash": "939221526",
+    "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1690365896008.0,
+    "created": 1690377041955.0,
     "source_on_save": false,
-    "relative_order": 1,
+    "relative_order": 3,
     "properties": {
         "tempName": "Untitled1",
         "chunk_output_type": "inline",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "24,0",
-        "scrollLine": "13"
+        "cursorPosition": "8,8",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1690367465,
-    "encoding": "UTF-8",
+    "lastKnownWriteTime": 1690381411,
+    "encoding": "ISO8859-1",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1690377172622,
+    "last_content_update": 1690381430641,
     "read_only": false,
     "read_only_alternatives": []
 }
