@@ -1,3 +1,0 @@
-"0","synopses_df_no_stop <- synopses_df %>% "
-"0","  anti_join(stop_words, by = ""word"") %>% "
-"0","  count(title, word, sort = TRUE)"

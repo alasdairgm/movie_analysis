@@ -21,8 +21,15 @@ movie <- c("Hot Fuzz",
            "Spider-Man: Far from Home",
            "Spider-Man: No Way Home",
            "Bill & Ted's Excellent Adventure",
-           "Dunkirk"
-           
+           "Dunkirk",
+           "Everything Everywhere All at Once",
+           "Children of Men",
+           "Scott Pilgrim vs. the World",
+           "The World's End",
+           "The Grand Budapest Hotel",
+           "Jurassic Park",
+           "The Lego Batman Movie",
+           "The LEGO Movie 2"
            
 )
 
@@ -47,9 +54,17 @@ synopsis <- c("A skilled London police officer, after irritating superiors with 
               "Following the events of Avengers: Endgame (2019), Spider-Man must step up to take on new threats in a world that has changed forever.",
               "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",
               "Two rock-'n-rolling teens, on the verge of failing their class, set out on a quest to make the ultimate school history report after being presented with a time machine.",
-              "Allied soldiers from Belgium, the British Commonwealth and Empire, and France are surrounded by the German Army and evacuated during a fierce battle in World War II."
+              "Allied soldiers from Belgium, the British Commonwealth and Empire, and France are surrounded by the German Army and evacuated during a fierce battle in World War II.",
+              "A middle-aged Chinese immigrant is swept up into an insane adventure in which she alone can save existence by exploring other universes and connecting with the lives she could have led.",
+              "In 2027, in a chaotic world in which women have somehow become infertile, a former activist agrees to help transport a miraculously pregnant woman to a sanctuary at sea.",
+              "In a magically realistic version of Toronto, a young man must defeat his new girlfriend's seven evil exes one by one in order to win her heart.",
+              "Five friends who reunite in an attempt to top their epic pub crawl from twenty years earlier unwittingly become humanity's only hope for survival.",
+              "A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel's glorious years under an exceptional concierge.",
+              "A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
+              "A cooler-than-ever Bruce Wayne must deal with the usual suspects as they plan to rule Gotham City, while discovering that he has accidentally adopted a teenage orphan who wishes to become his sidekick.",
+              "It's been five years since everything was awesome and the citizens are facing a huge new threat: Lego Duplo invaders from outer space, wrecking everything faster than they can rebuild."
               
-              )
+                           )
 
 synopsis_df <- tibble(
   movie, synopsis

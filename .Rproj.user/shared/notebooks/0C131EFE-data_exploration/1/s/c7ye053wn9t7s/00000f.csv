@@ -1,6 +1,0 @@
-"0","movies_clean <- movies %>% "
-"0","  left_join(synopses, by = c(""title"" = ""movie"")) %>% "
-"0","  select(-c(""const"", ""url"", ""title_type"")) %>% "
-"0","  relocate(title, .before = 1) # move title to first col"
-"0",""
-"0","movies_clean"

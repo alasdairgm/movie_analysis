@@ -1,0 +1,104 @@
+---
+title: "Analysis of Al's favourite movies"
+output:
+  html_document:
+    toc: true # contents
+    toc_float: true # contents float
+    number_sections: true
+    df_print: paged # paged dataframes
+    css: styles.css # use css file from this project
+  pdf_document: default
+---
+
+# Intro 
+
+In this analysis I read in my cleaned movies data (taken from IMDB) to examine the summaries and trends that exist within my favourite movie selections.
+
+```{r}
+library(tidyverse)
+library(vctrs)
+
+movies <- read_csv("clean_data/movies_clean.csv")
+```
+
+# Which genres do I enjoy?
+
+First, will create a summary table showing how often each genre appears (as most films have several).
+
+```{r}
+# how many genres am I working with?
+genres_unique <- movies %>% 
+  select(genres) %>% 
+  pull() %>% 
+  str_split(pattern = ", ") %>% 
+  flatten_chr() %>% 
+  unique()
+
+genres_unique
+```
+
+
+```{r}
+# creating a logical column for every genre
+movies_genres <- movies %>% 
+  mutate(genre_action = str_detect(genres, "[Aa]ction"), .before = num_votes) %>% 
+  mutate(genre_adventure = str_detect(genres, "[Aa]dventure"), .before = num_votes) %>% 
+  mutate(genre_animation = str_detect(genres, "[Aa]nimation"), .before = num_votes) %>% 
+  mutate(genre_comedy = str_detect(genres, "[Cc]omedy"), .before = num_votes) %>% 
+  mutate(genre_crime = str_detect(genres, "[Cc]rime"), .before = num_votes) %>% 
+  mutate(genre_drama = str_detect(genres, "[Dd]rama"), .before = num_votes) %>% 
+  mutate(genre_fantasy = str_detect(genres, "[Ff]antasy"), .before = num_votes) %>% 
+  mutate(genre_family = str_detect(genres, "[Ff]amily"), .before = num_votes) %>% 
+  mutate(genre_history = str_detect(genres, "[Hh]istory"), .before = num_votes) %>% 
+  mutate(genre_horror = str_detect(genres, "[Hh]orror"), .before = num_votes) %>% 
+  mutate(genre_music = str_detect(genres, "[Mm]usic"), .before = num_votes) %>% 
+  mutate(genre_musical = str_detect(genres, "[Mm]usical"), .before = num_votes) %>% 
+  mutate(genre_mystery = str_detect(genres, "[Mm]ystery"), .before = num_votes) %>% 
+  mutate(genre_romance = str_detect(genres, "[Rr]omance"), .before = num_votes) %>% 
+  mutate(genre_scifi = str_detect(genres, "[Ss]ci-Fi"), .before = num_votes) %>% 
+  mutate(genre_thriller = str_detect(genres, "[Tt]hriller"), .before = num_votes) %>% 
+  mutate(genre_war = str_detect(genres, "[Ww]ar"), .before = num_votes) %>% 
+  # count up how often each genre appears
+  summarise(across(.cols = starts_with("genre_"), .fns = ~sum(.x == TRUE))) %>% 
+  # pivot the data so each row is a genre
+  pivot_longer(cols = everything(), names_to = "genre", values_to = "count") %>% 
+  mutate(genre = str_remove(genre, "genre_"))
+
+
+```
+
+
+```{r}
+movies_genres %>% 
+  mutate(genre = str_to_title(genre)) %>% 
+  ggplot() +
+  geom_col(aes(x = reorder(genre, count, decreasing = T), y = count, fill = genre),
+           show.legend = F)  +
+  #scale_fill_brewer(palette = "Set2") +
+  labs(x = "Movie genre\n",
+       y = "\nCount in my top movies") +
+  coord_flip()
+```
+
+```{r}
+library(RColorBrewer)
+par(mar=c(3,4,2,2))
+display.brewer.all()
+```
+
+# Favourite directors
+
+```{r}
+movies %>% 
+  mutate(directors = str_replace(directors, ", .+", "*")) %>% 
+  group_by(directors) %>% 
+  summarise(count = n()) %>% 
+  filter(count > 1) %>% 
+  ggplot() +
+  geom_col(aes(x = reorder(directors, count, decreasing = T), y = count,
+               fill = directors), show.legend = F) +
+  labs(x = "Director\n(* plus others)\n",
+       y = "\nCount in my top movies") +
+  coord_flip()
+```
+
