@@ -117,7 +117,7 @@ get_sentiments("afinn")
 just_words %>% 
   inner_join(get_sentiments("afinn")) %>% 
   mutate(abs_value = abs(value)) %>% 
-  slice_max(abs_value, n = 5) %>%  # most emotive words, regardless of positice or negative
+  slice_max(abs_value, n = 5) %>%  # most emotive words, regardless of positive or negative
   mutate(word = factor(word, levels = word)) %>% # alphabetical
   ggplot() +
   aes(x = word, y = n, fill = value) +

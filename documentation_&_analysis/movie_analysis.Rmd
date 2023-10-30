@@ -80,11 +80,6 @@ movies_genres %>%
   coord_flip()
 ```
 
-```{r}
-library(RColorBrewer)
-par(mar=c(3,4,2,2))
-display.brewer.all()
-```
 
 # Favourite directors
 
